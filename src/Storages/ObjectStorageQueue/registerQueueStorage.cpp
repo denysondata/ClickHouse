@@ -508,6 +508,14 @@ In case of non-graceful server termination, it is possible that we can have not 
 
 Default value: `21600` (6 hours).
 
+### `persistent_processing_node_owner_absence_grace_seconds` {#persistent-processing-node-owner-absence-grace-seconds}
+
+Persistent processing nodes and bucket locks are periodically refreshed while they are owned by an active server process. If the exact active-registry entry recorded in a claim is absent and the claim has not been refreshed for this grace period, the claim can be cleaned up before `persistent_processing_node_ttl_seconds` expires.
+
+The active-registry check and grace period are both required. A transient Keeper session loss therefore does not make a claim immediately eligible for cleanup.
+
+Default value: `600` (10 minutes).
+
 ## S3-related settings {#s3-settings}
 
 Engine supports all s3 related settings. For more information about S3 settings see [here](/reference/engines/table-engines/integrations/s3).
